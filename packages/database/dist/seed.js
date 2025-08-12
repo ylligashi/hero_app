@@ -5845,8 +5845,8 @@ var require_client = __commonJS({
     exports2.Prisma = Prisma;
     exports2.$Enums = {};
     Prisma.prismaVersion = {
-      client: "6.6.0",
-      engine: "f676762280b54cd07c770017ed3711ddde35f37a"
+      client: "6.13.0",
+      engine: "361e86d0ea4987e9f53a565309b3eed797a6bcbd"
     };
     Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError2;
     Prisma.PrismaClientUnknownRequestError = PrismaClientUnknownRequestError2;
@@ -5969,8 +5969,8 @@ var require_client = __commonJS({
         "schemaEnvPath": "../../../../.env"
       },
       "relativePath": "../../prisma",
-      "clientVersion": "6.6.0",
-      "engineVersion": "f676762280b54cd07c770017ed3711ddde35f37a",
+      "clientVersion": "6.13.0",
+      "engineVersion": "361e86d0ea4987e9f53a565309b3eed797a6bcbd",
       "datasourceNames": [
         "db"
       ],
@@ -5979,7 +5979,7 @@ var require_client = __commonJS({
         "db": {
           "url": {
             "fromEnvVar": "DATABASE_URL",
-            "value": "postgresql://postgres@localhost:5432/hero_app?schema=public"
+            "value": null
           }
         }
       },

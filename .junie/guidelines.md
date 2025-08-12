@@ -150,3 +150,22 @@ Notes:
 - Use pnpm for shadcn/ui installation commands
 - Use Prisma with PostgreSQL (no MySQL)
 - Use Ollama locally for LLM interactions
+
+
+
+## Admin app (current scaffolding)
+- Routes protected by middleware (apps/admin/middleware.ts). For now it checks a temporary `admin-auth` cookie as an auth gate. Replace this with NextAuth session checks when wiring up email/password auth.
+- Temporary login page is available at `/login` in the admin app:
+  - Page: `apps/admin/app/login/page.tsx`
+  - Server actions: `apps/admin/app/login/actions.ts` (sets/deletes the `admin-auth` cookie)
+- The root layout in `apps/admin/app/layout.tsx` provides a simple container. Tailwind and shadcn/ui can be introduced incrementally per guidelines.
+
+### Running admin locally
+- From the repo root: `pnpm dev` (runs all apps via turbo) and open the admin app in your browser (according to your dev setup/ports). Navigate to `/login` to sign in.
+- Or run the admin app directly (if you use per-app dev scripts):
+  - `cd apps/admin && pnpm dev`
+
+### Migrating to NextAuth
+- Replace the cookie check in `middleware.ts` with NextAuth’s session verification.
+- Remove the temporary login route (`apps/admin/app/login/*`) after wiring a credentials provider.
+- Ensure `NEXTAUTH_SECRET` is set in `.env` and follow the Tech stack rules (email/password only).
