@@ -18,11 +18,13 @@
     "studio": "prisma studio"
   },
   "dependencies": {
-    "@prisma/client": "latest"
+    "@prisma/client": "latest",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@types/node": "^20.11.24",
     "eslint": "^8.57.0",
     "prisma": "latest",
     "rimraf": "^5.0.5",

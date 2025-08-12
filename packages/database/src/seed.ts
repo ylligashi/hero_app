@@ -1,32 +1,32 @@
-import { prisma } from "./client";
+import { prisma, Role } from "./client";
+import bcrypt from "bcryptjs";
 
-import type { User } from "../generated/client";
+async function seed() {
+  const email = process.env.ADMIN_EMAIL || "yll.gashi29@gmail.com";
+  const password = process.env.ADMIN_PASSWORD || "test123";
+  const name = process.env.ADMIN_NAME || "Admin";
 
-const DEFAULT_USERS = [
-  // Add your own user to pre-populate the database with
-  {
-    name: "Tim Apple",
-    email: "tim@apple.com",
-  },
-] as Array<Partial<User>>;
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  await prisma.user.upsert({
+    where: { email },
+    update: {
+      name,
+      role: Role.ADMIN,
+      passwordHash,
+    },
+    create: {
+      email,
+      name,
+      role: Role.ADMIN,
+      passwordHash,
+    },
+  });
+}
 
 (async () => {
   try {
-    await Promise.all(
-      DEFAULT_USERS.map((user) =>
-        prisma.user.upsert({
-          where: {
-            email: user.email!,
-          },
-          update: {
-            ...user,
-          },
-          create: {
-            ...user,
-          },
-        })
-      )
-    );
+    await seed();
   } catch (error) {
     console.error(error);
     process.exit(1);

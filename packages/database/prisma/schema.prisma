@@ -1,19 +1,74 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Prisma schema for Hero App (PostgreSQL)
+// Learn more: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
-  output = "../generated/client"
+  output   = "../generated/client"
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
+  email         String         @unique
+  passwordHash  String
   name          String?
-  email         String?   @unique
-  emailVerified DateTime?
+  role          Role           @default(USER)
+  image         String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  conversations Conversation[]
+  messages      Message[]
+}
+
+model Hero {
+  id            String         @id @default(cuid())
+  name          String
+  description   String?
+  systemPrompt  String?
+  modelName     String         @default("llama3.2:latest")
+  avatarUrl     String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  conversations Conversation[]
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  title     String?
+  user      User      @relation(fields: [userId], references: [id])
+  userId    String
+  hero      Hero      @relation(fields: [heroId], references: [id])
+  heroId    String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  messages  Message[]
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  content        String
+  role           MessageRole
+  user           User?        @relation(fields: [userId], references: [id])
+  userId         String?
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String
+  createdAt      DateTime     @default(now())
 }
