@@ -84,7 +84,7 @@ This application lets users have conversations with their chosen “hero” powe
   - `NEXTAUTH_SECRET` required (e.g., `openssl rand -base64 32`)
 - Ollama:
   - Install and run locally (https://ollama.com)
-  - Ensure models you plan to use are pulled locally (e.g., `ollama pull llama3`)
+  - Ensure models you plan to use are pulled locally (e.g., `ollama pull llama3.2:latest`)
 
 ## Prisma schema (PostgreSQL)
 Below is the baseline schema to implement in `packages/database/prisma/schema.prisma` (shared database package). It covers required entities and relationships.
