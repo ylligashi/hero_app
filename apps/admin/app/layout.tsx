@@ -1,4 +1,5 @@
 import './globals.css';
+import { SessionProvider } from '@/components/session-provider';
 
 export default function RootLayout({
   children,
@@ -8,9 +9,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen bg-background text-foreground antialiased">
-        <div className="container mx-auto p-4 max-w-xl">
+        <SessionProvider>
           {children}
-        </div>
+        </SessionProvider>
       </body>
     </html>
   );

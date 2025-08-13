@@ -1,12 +1,6 @@
-import { prisma } from "@repo/database";
+import { redirect } from "next/navigation";
 
-export default async function IndexPage() {
-  const users = await prisma.user.findMany();
-
-  return (
-    <div>
-      <h1>Hello World</h1>
-      <pre>{JSON.stringify(users, null, 2)}</pre>
-    </div>
-  );
+export default function IndexPage() {
+  // Redirect to the heroes page which is inside the protected layout
+  redirect("/heroes");
 }

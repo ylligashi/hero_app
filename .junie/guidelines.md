@@ -13,6 +13,37 @@ This repository is a monorepo that hosts multiple Next.js applications and share
 - apps/web — the end-user mobile‑first web application (max 600px width layout)
 - apps/admin — the admin application for managing heroes, models, users, and dashboards
 - packages/** — shared code (e.g., prisma schema, UI components, config)
+  - packages/database — contains Prisma schema, migrations, and database client
+
+### Project Directory Structure
+```
+hero-app/
+├── apps/
+│   ├── admin/               # Admin application
+│   │   ├── app/             # Next.js app router structure
+│   │   │   ├── api/         # API routes
+│   │   │   │   └── auth/    # NextAuth API routes
+│   │   │   └── login/       # Login page (temporary)
+│   │   ├── components/      # UI components
+│   │   │   └── ui/          # shadcn/ui components
+│   │   └── lib/             # Utility functions
+│   └── web/                 # User-facing application
+│       ├── app/             # Next.js app router structure
+│       │   └── api/         # API routes
+│       │       └── auth/    # NextAuth API routes
+│       └── components/      # UI components
+│           └── ui/          # shadcn/ui components
+├── packages/
+│   ├── config-eslint/       # Shared ESLint configuration
+│   ├── config-typescript/   # Shared TypeScript configuration
+│   └── database/            # Shared database package
+│       ├── prisma/          # Prisma schema and migrations
+│       │   ├── migrations/  # Database migrations
+│       │   └── schema.prisma # Prisma schema definition
+│       └── src/             # Database client source code
+├── .env                     # Environment variables
+└── docker-compose.yml       # Docker configuration (PostgreSQL)
+```
 
 ## Project overview
 This application lets users have conversations with their chosen “hero” powered by a local Ollama model.

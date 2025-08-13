@@ -1,3 +1,6 @@
+import "./globals.css";
+import { SessionProvider } from "@/components/session-provider";
+
 export default function RootLayout({
   children,
 }: {
@@ -5,7 +8,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="min-h-screen">
+        <SessionProvider>
+          <main className="mx-auto max-w-[600px]">
+            {children}
+          </main>
+        </SessionProvider>
+      </body>
     </html>
   );
 }
