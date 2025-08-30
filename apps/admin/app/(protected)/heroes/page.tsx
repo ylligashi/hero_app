@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { prisma } from "@repo/database";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
   Table,
@@ -15,7 +21,7 @@ import {
 async function getHeroes() {
   try {
     return await prisma.hero.findMany({
-      orderBy: { createdAt: 'desc' }
+      orderBy: { createdAt: "desc" },
     });
   } catch (error) {
     console.error("Failed to fetch heroes:", error);
@@ -25,7 +31,7 @@ async function getHeroes() {
 
 export default async function HeroesPage() {
   const heroes = await getHeroes();
-  
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -86,7 +92,9 @@ export default async function HeroesPage() {
                       <Button variant="outline" size="sm" asChild>
                         <Link href={`/heroes/${hero.id}/edit`}>Edit</Link>
                       </Button>
-                      <Button variant="destructive" size="sm">Delete</Button>
+                      <Button variant="destructive" size="sm">
+                        Delete
+                      </Button>
                     </TableCell>
                   </TableRow>
                 ))

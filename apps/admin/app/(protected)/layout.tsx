@@ -45,14 +45,13 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { data: session } = useSession();
-  
   const navItems = [
     { title: "Dashboard", href: "/" },
     { title: "Heroes", href: "/heroes" },
   ];
 
-  const userInitials = session?.user?.name 
-    ? session.user.name.slice(0, 2).toUpperCase() 
+  const userInitials = session?.user?.name
+    ? session.user.name.slice(0, 2).toUpperCase()
     : session?.user?.email?.slice(0, 2).toUpperCase() || "AD";
 
   return (
@@ -63,25 +62,32 @@ export default function DashboardLayout({
           <div className="font-semibold">Admin Dashboard</div>
         </div>
       </header>
-      
+
       <div className="flex flex-1">
         {/* Desktop Sidebar */}
         <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:border-r lg:bg-muted/10">
           <div className="flex flex-col space-y-6 p-6">
             <div className="flex items-center">
               <Avatar className="h-10 w-10 mr-3">
-                <AvatarImage src={session?.user?.image || ""} alt={session?.user?.name || "Admin"} />
+                <AvatarImage
+                  src={session?.user?.image || ""}
+                  alt={session?.user?.name || "Admin"}
+                />
                 <AvatarFallback>{userInitials}</AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-medium">{session?.user?.name || session?.user?.email || "Admin"}</p>
-                <p className="text-sm text-muted-foreground">{session?.user?.email}</p>
+                <p className="font-medium">
+                  {session?.user?.name || session?.user?.email || "Admin"}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {session?.user?.email}
+                </p>
               </div>
             </div>
             <SidebarNav className="flex-1" items={navItems} />
           </div>
         </aside>
-        
+
         {/* Main Content */}
         <main className="flex-1 p-6 lg:p-8 max-w-7xl pb-20 lg:pb-6">
           {children}

@@ -17,11 +17,11 @@ export default function ChatInput({ conversationId }: ChatInputProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!message.trim() || isLoading) return;
-    
+
     setIsLoading(true);
-    
+
     try {
       // Send message to server
       const response = await fetch("/api/messages", {
@@ -34,11 +34,11 @@ export default function ChatInput({ conversationId }: ChatInputProps) {
           conversationId,
         }),
       });
-      
+
       if (!response.ok) {
         throw new Error("Failed to send message");
       }
-      
+
       // Clear input and refresh messages
       setMessage("");
       router.refresh();
@@ -63,11 +63,7 @@ export default function ChatInput({ conversationId }: ChatInputProps) {
           }
         }}
       />
-      <Button 
-        type="submit" 
-        size="icon" 
-        disabled={isLoading || !message.trim()}
-      >
+      <Button type="submit" size="icon" disabled={isLoading || !message.trim()}>
         <SendIcon className="h-4 w-4" />
       </Button>
     </form>
