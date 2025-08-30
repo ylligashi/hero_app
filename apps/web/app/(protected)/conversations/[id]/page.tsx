@@ -13,9 +13,11 @@ interface ConversationPageProps {
   };
 }
 
-export default async function ConversationPage({ params }: ConversationPageProps) {
+export default async function ConversationPage({
+  params,
+}: ConversationPageProps) {
   const session = await getServerSession(authOptions);
-  
+
   if (!session?.user?.id) {
     redirect("/login");
   }
@@ -44,14 +46,22 @@ export default async function ConversationPage({ params }: ConversationPageProps
       {/* Header */}
       <div className="flex items-center gap-3 p-4 border-b">
         <Avatar>
-          <AvatarImage src={conversation.hero.avatarUrl || ""} alt={conversation.hero.name} />
-          <AvatarFallback>{conversation.hero.name.substring(0, 2)}</AvatarFallback>
+          <AvatarImage
+            src={conversation.hero.avatarUrl || ""}
+            alt={conversation.hero.name}
+          />
+          <AvatarFallback>
+            {conversation.hero.name.substring(0, 2)}
+          </AvatarFallback>
         </Avatar>
         <div>
           <h1 className="font-semibold">
-            {conversation.title || `Conversation with ${conversation.hero.name}`}
+            {conversation.title ||
+              `Conversation with ${conversation.hero.name}`}
           </h1>
-          <p className="text-xs text-muted-foreground">{conversation.hero.name}</p>
+          <p className="text-xs text-muted-foreground">
+            {conversation.hero.name}
+          </p>
         </div>
       </div>
 
@@ -59,18 +69,27 @@ export default async function ConversationPage({ params }: ConversationPageProps
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
         {conversation.messages.length === 0 ? (
           <div className="text-center py-10">
-            <p className="text-muted-foreground">No messages yet. Start the conversation!</p>
+            <p className="text-muted-foreground">
+              No messages yet. Start the conversation!
+            </p>
           </div>
         ) : (
           conversation.messages.map((message) => {
             const isUser = message.role === "USER";
             return (
-              <div key={message.id} className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-                <Card className={`max-w-[80%] ${isUser ? "bg-primary text-primary-foreground" : "bg-muted"}`}>
+              <div
+                key={message.id}
+                className={`flex ${isUser ? "justify-end" : "justify-start"}`}
+              >
+                <Card
+                  className={`max-w-[80%] ${isUser ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                >
                   <CardContent className="p-3">
                     <p className="text-sm">{message.content}</p>
                     <div className="text-xs mt-1 opacity-70">
-                      {formatDistanceToNow(new Date(message.createdAt), { addSuffix: true })}
+                      {formatDistanceToNow(new Date(message.createdAt), {
+                        addSuffix: true,
+                      })}
                     </div>
                   </CardContent>
                 </Card>

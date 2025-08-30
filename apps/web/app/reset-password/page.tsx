@@ -11,7 +11,7 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  
+
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -60,7 +60,8 @@ export default function ResetPasswordPage() {
         <div className="w-full max-w-md space-y-8 text-center">
           <h1 className="text-2xl font-bold">Password reset successful</h1>
           <p className="mt-2 text-sm text-gray-600">
-            Your password has been reset successfully. You can now log in with your new password.
+            Your password has been reset successfully. You can now log in with
+            your new password.
           </p>
           <div className="mt-4">
             <Link href="/login">
@@ -79,7 +80,8 @@ export default function ResetPasswordPage() {
         <div className="w-full max-w-md space-y-8 text-center">
           <h1 className="text-2xl font-bold">Invalid reset link</h1>
           <p className="mt-2 text-sm text-gray-600">
-            The password reset link is invalid or has expired. Please request a new password reset.
+            The password reset link is invalid or has expired. Please request a
+            new password reset.
           </p>
           <div className="mt-4">
             <Link href="/forgot-password">
@@ -135,11 +137,7 @@ export default function ResetPasswordPage() {
             <div className="text-sm text-red-500 text-center">{error}</div>
           )}
 
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Resetting..." : "Reset password"}
           </Button>
 

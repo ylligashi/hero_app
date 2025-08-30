@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
 
         const isPasswordValid = await compare(
           credentials.password,
-          user.passwordHash
+          user.passwordHash,
         );
 
         if (!isPasswordValid) {
@@ -76,7 +76,7 @@ declare module "next-auth" {
     id: string;
     role: Role;
   }
-  
+
   interface Session {
     user: {
       id: string;
@@ -84,7 +84,7 @@ declare module "next-auth" {
       name?: string | null;
       image?: string | null;
       role: Role;
-    }
+    };
   }
 }
 

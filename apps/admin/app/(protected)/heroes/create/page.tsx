@@ -7,11 +7,31 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 // Define form validation schema
 const formSchema = z.object({
@@ -46,7 +66,7 @@ export default function CreateHeroPage() {
   // Form submission handler
   async function onSubmit(data: FormValues) {
     setIsLoading(true);
-    
+
     try {
       const response = await fetch("/api/heroes/create", {
         method: "POST",
@@ -61,12 +81,10 @@ export default function CreateHeroPage() {
         throw new Error(error.message || "Failed to create hero");
       }
 
-
       router.push("/heroes");
       router.refresh();
     } catch (error) {
       console.error("Error creating hero:", error);
-
     } finally {
       setIsLoading(false);
     }
@@ -122,10 +140,10 @@ export default function CreateHeroPage() {
                   <FormItem>
                     <FormLabel>Description</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        placeholder="The brilliant physicist who will explain complex concepts in simple terms" 
+                      <Textarea
+                        placeholder="The brilliant physicist who will explain complex concepts in simple terms"
                         rows={3}
-                        {...field} 
+                        {...field}
                       />
                     </FormControl>
                     <FormDescription>
@@ -143,14 +161,15 @@ export default function CreateHeroPage() {
                   <FormItem>
                     <FormLabel>System Prompt</FormLabel>
                     <FormControl>
-                      <Textarea 
-                        placeholder="You are Albert Einstein, the legendary physicist..." 
+                      <Textarea
+                        placeholder="You are Albert Einstein, the legendary physicist..."
                         rows={5}
-                        {...field} 
+                        {...field}
                       />
                     </FormControl>
                     <FormDescription>
-                      Instructions for the AI model on how to behave as this character
+                      Instructions for the AI model on how to behave as this
+                      character
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -163,8 +182,8 @@ export default function CreateHeroPage() {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Model</FormLabel>
-                    <Select 
-                      onValueChange={field.onChange} 
+                    <Select
+                      onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <FormControl>
@@ -173,9 +192,13 @@ export default function CreateHeroPage() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="llama3.2:latest">Llama 3.2</SelectItem>
+                        <SelectItem value="llama3.2:latest">
+                          Llama 3.2
+                        </SelectItem>
                         <SelectItem value="mistral:latest">Mistral</SelectItem>
-                        <SelectItem value="codellama:latest">Code Llama</SelectItem>
+                        <SelectItem value="codellama:latest">
+                          Code Llama
+                        </SelectItem>
                         <SelectItem value="phi3:latest">Phi-3</SelectItem>
                       </SelectContent>
                     </Select>
@@ -194,7 +217,10 @@ export default function CreateHeroPage() {
                   <FormItem>
                     <FormLabel>Avatar URL (Optional)</FormLabel>
                     <FormControl>
-                      <Input placeholder="https://example.com/avatar.jpg" {...field} />
+                      <Input
+                        placeholder="https://example.com/avatar.jpg"
+                        {...field}
+                      />
                     </FormControl>
                     <FormDescription>
                       URL to an image for this hero

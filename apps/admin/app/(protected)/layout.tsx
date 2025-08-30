@@ -4,11 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetTrigger 
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
@@ -52,14 +48,14 @@ export default function DashboardLayout({
 }) {
   const { data: session } = useSession();
   const [open, setOpen] = useState(false);
-  
+
   const navItems = [
     { title: "Dashboard", href: "/heroes" },
     { title: "Heroes", href: "/heroes" },
   ];
 
-  const userInitials = session?.user?.name 
-    ? session.user.name.slice(0, 2).toUpperCase() 
+  const userInitials = session?.user?.name
+    ? session.user.name.slice(0, 2).toUpperCase()
     : session?.user?.email?.slice(0, 2).toUpperCase() || "AD";
 
   return (
@@ -93,12 +89,19 @@ export default function DashboardLayout({
               <div className="flex flex-col space-y-6 p-4">
                 <div className="flex items-center">
                   <Avatar className="h-10 w-10 mr-3">
-                    <AvatarImage src={session?.user?.image || ""} alt={session?.user?.name || "Admin"} />
+                    <AvatarImage
+                      src={session?.user?.image || ""}
+                      alt={session?.user?.name || "Admin"}
+                    />
                     <AvatarFallback>{userInitials}</AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-medium">{session?.user?.name || session?.user?.email || "Admin"}</p>
-                    <p className="text-sm text-muted-foreground">{session?.user?.email}</p>
+                    <p className="font-medium">
+                      {session?.user?.name || session?.user?.email || "Admin"}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {session?.user?.email}
+                    </p>
                   </div>
                 </div>
                 <SidebarNav items={navItems} />
@@ -108,29 +111,34 @@ export default function DashboardLayout({
           <div className="font-semibold">Admin Dashboard</div>
         </div>
       </header>
-      
+
       <div className="flex flex-1">
         {/* Desktop Sidebar */}
         <aside className="hidden lg:flex lg:w-64 lg:flex-col lg:border-r lg:bg-muted/10">
           <div className="flex flex-col space-y-6 p-6">
             <div className="flex items-center">
               <Avatar className="h-10 w-10 mr-3">
-                <AvatarImage src={session?.user?.image || ""} alt={session?.user?.name || "Admin"} />
+                <AvatarImage
+                  src={session?.user?.image || ""}
+                  alt={session?.user?.name || "Admin"}
+                />
                 <AvatarFallback>{userInitials}</AvatarFallback>
               </Avatar>
               <div>
-                <p className="font-medium">{session?.user?.name || session?.user?.email || "Admin"}</p>
-                <p className="text-sm text-muted-foreground">{session?.user?.email}</p>
+                <p className="font-medium">
+                  {session?.user?.name || session?.user?.email || "Admin"}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  {session?.user?.email}
+                </p>
               </div>
             </div>
             <SidebarNav className="flex-1" items={navItems} />
           </div>
         </aside>
-        
+
         {/* Main Content */}
-        <main className="flex-1 p-6 lg:p-8 max-w-7xl">
-          {children}
-        </main>
+        <main className="flex-1 p-6 lg:p-8 max-w-7xl">{children}</main>
       </div>
     </div>
   );

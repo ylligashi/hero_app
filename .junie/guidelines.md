@@ -10,12 +10,14 @@ This repository is a monorepo that hosts multiple Next.js applications and share
 - AI runtime: Ollama (local)
 
 ## Monorepo layout
+
 - apps/web — the end-user mobile‑first web application (max 600px width layout)
 - apps/admin — the admin application for managing heroes, models, users, and dashboards
-- packages/** — shared code (e.g., prisma schema, UI components, config)
+- packages/\*\* — shared code (e.g., prisma schema, UI components, config)
   - packages/database — contains Prisma schema, migrations, and database client
 
 ### Project Directory Structure
+
 ```
 hero-app/
 ├── apps/
@@ -46,6 +48,7 @@ hero-app/
 ```
 
 ## Project overview
+
 This application lets users have conversations with their chosen “hero” powered by a local Ollama model.
 
 - Admin app
@@ -60,6 +63,7 @@ This application lets users have conversations with their chosen “hero” powe
   - Users choose a hero and start a conversation
 
 ## Tech stack rules
+
 - Always use pnpm for installing and running scripts
 - Use PostgreSQL as the database
 - Use Prisma for schema and migrations
@@ -69,6 +73,7 @@ This application lets users have conversations with their chosen “hero” powe
 - Use local Ollama for LLM interactions
 
 ## Environment and setup
+
 - Node: use an active LTS version
 - Install dependencies: `pnpm install`
 - Database connection (.env):
@@ -87,6 +92,7 @@ This application lets users have conversations with their chosen “hero” powe
   - Ensure models you plan to use are pulled locally (e.g., `ollama pull llama3.2:latest`)
 
 ## Prisma schema (PostgreSQL)
+
 Below is the baseline schema to implement in `packages/database/prisma/schema.prisma` (shared database package). It covers required entities and relationships.
 
 ```prisma
@@ -166,25 +172,27 @@ model Message {
 ```
 
 Notes:
+
 - Passwords must be stored as secure hashes (never plaintext).
 - Only email/password auth via NextAuth is allowed.
 - Conversation and Message are linked; Message optionally links to User (assistant messages won’t have a user).
 
 ## Conventions
+
 - Lint/format: Prettier + ESLint where applicable
 - Commit messages: conventional commits preferred (feat, fix, chore, etc.)
 - Code review: small, focused PRs
 
 ## Tasks and expectations
+
 - Admin app must protect pages via middleware (auth gate)
 - Web app must keep layout mobile-friendly with a 600px max content width
 - Use pnpm for shadcn/ui installation commands
 - Use Prisma with PostgreSQL (no MySQL)
 - Use Ollama locally for LLM interactions
 
-
-
 ## Admin app (current scaffolding)
+
 - Routes protected by middleware (apps/admin/middleware.ts). For now it checks a temporary `admin-auth` cookie as an auth gate. Replace this with NextAuth session checks when wiring up email/password auth.
 - Temporary login page is available at `/login` in the admin app:
   - Page: `apps/admin/app/login/page.tsx`
@@ -192,11 +200,13 @@ Notes:
 - The root layout in `apps/admin/app/layout.tsx` provides a simple container. Tailwind and shadcn/ui can be introduced incrementally per guidelines.
 
 ### Running admin locally
+
 - From the repo root: `pnpm dev` (runs all apps via turbo) and open the admin app in your browser (according to your dev setup/ports). Navigate to `/login` to sign in.
 - Or run the admin app directly (if you use per-app dev scripts):
   - `cd apps/admin && pnpm dev`
 
 ### Migrating to NextAuth
+
 - Replace the cookie check in `middleware.ts` with NextAuth’s session verification.
 - Remove the temporary login route (`apps/admin/app/login/*`) after wiring a credentials provider.
 - Ensure `NEXTAUTH_SECRET` is set in `.env` and follow the Tech stack rules (email/password only).

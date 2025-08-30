@@ -1,13 +1,20 @@
 import { prisma } from "@repo/database";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function HeroesPage() {
   const heroes = await prisma.hero.findMany({
     orderBy: {
-      name: 'asc',
+      name: "asc",
     },
   });
 
@@ -15,7 +22,9 @@ export default async function HeroesPage() {
     <div className="container py-6 space-y-6">
       <div>
         <h1 className="text-2xl font-bold tracking-tight">Heroes</h1>
-        <p className="text-muted-foreground">Choose a hero to start a conversation</p>
+        <p className="text-muted-foreground">
+          Choose a hero to start a conversation
+        </p>
       </div>
 
       <div className="grid gap-4">
@@ -44,7 +53,7 @@ export default async function HeroesPage() {
               </div>
             </CardContent>
             <CardFooter>
-              <Link 
+              <Link
                 href={`/conversations/new?heroId=${hero.id}`}
                 className="w-full"
               >
