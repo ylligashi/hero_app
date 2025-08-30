@@ -7,7 +7,7 @@ import { Home, MessageSquare, User } from "lucide-react";
 
 export function BottomNav() {
   const pathname = usePathname();
-  
+
   const navItems = [
     {
       name: "Heroes",
@@ -30,7 +30,8 @@ export function BottomNav() {
     <div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background">
       <nav className="mx-auto max-w-[600px] flex justify-around">
         {navItems.map((item) => {
-          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
+          const isActive =
+            pathname === item.href || pathname.startsWith(`${item.href}/`);
           return (
             <Link
               key={item.name}
@@ -39,7 +40,7 @@ export function BottomNav() {
                 "flex flex-col items-center py-2 px-3 min-w-[80px]",
                 isActive
                   ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               <item.icon className="h-6 w-6" />

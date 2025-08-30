@@ -69,8 +69,8 @@ export default function LoginPage() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password">Password</Label>
-                <Link 
-                  href="/forgot-password" 
+                <Link
+                  href="/forgot-password"
                   className="text-sm font-medium text-primary hover:underline"
                 >
                   Forgot password?
@@ -91,11 +91,7 @@ export default function LoginPage() {
             <div className="text-sm text-red-500 text-center">{error}</div>
           )}
 
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? "Signing in..." : "Sign in"}
           </Button>
         </form>

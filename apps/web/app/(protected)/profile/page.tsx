@@ -4,7 +4,14 @@ import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { LogOutIcon, UserIcon } from "lucide-react";
 
 export default function ProfilePage() {
@@ -26,7 +33,10 @@ export default function ProfilePage() {
       <Card>
         <CardHeader className="flex flex-row items-center gap-4">
           <Avatar className="h-16 w-16">
-            <AvatarImage src={session?.user?.image || ""} alt={session?.user?.name || "User"} />
+            <AvatarImage
+              src={session?.user?.image || ""}
+              alt={session?.user?.name || "User"}
+            />
             <AvatarFallback>
               <UserIcon className="h-8 w-8" />
             </AvatarFallback>
@@ -44,14 +54,16 @@ export default function ProfilePage() {
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">Role</span>
-              <span>{session?.user?.role ? String(session.user.role) : "User"}</span>
+              <span>
+                {session?.user?.role ? String(session.user.role) : "User"}
+              </span>
             </div>
           </div>
         </CardContent>
         <CardFooter>
-          <Button 
-            variant="destructive" 
-            className="w-full" 
+          <Button
+            variant="destructive"
+            className="w-full"
             onClick={handleSignOut}
             disabled={isLoading}
           >

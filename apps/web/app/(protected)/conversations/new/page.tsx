@@ -9,30 +9,32 @@ interface NewConversationPageProps {
   };
 }
 
-export default async function NewConversationPage({ searchParams }: NewConversationPageProps) {
+export default async function NewConversationPage({
+  searchParams,
+}: NewConversationPageProps) {
   const session = await getServerSession(authOptions);
-  
+
   if (!session?.user?.id) {
     redirect("/login");
   }
-  
+
   const { heroId } = searchParams;
-  
+
   if (!heroId) {
     redirect("/heroes");
   }
-  
+
   // Verify the hero exists
   const hero = await prisma.hero.findUnique({
     where: {
       id: heroId,
     },
   });
-  
+
   if (!hero) {
     redirect("/heroes");
   }
-  
+
   // Create a new conversation
   const conversation = await prisma.conversation.create({
     data: {
@@ -41,7 +43,7 @@ export default async function NewConversationPage({ searchParams }: NewConversat
       title: `Conversation with ${hero.name}`,
     },
   });
-  
+
   // Redirect to the new conversation
   redirect(`/conversations/${conversation.id}`);
 }
